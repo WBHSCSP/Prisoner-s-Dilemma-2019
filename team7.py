@@ -32,8 +32,8 @@ def move(my_history, their_history, my_score, their_score):
     index=random.randint(0,1)
     for c in their_history:
         historycc=historycc+1
-        for b in their_history:
-            historybb= historybb+1
+    for b in their_history:
+        historybb= historybb+1
     while my_score == 0:
         return (choices[index])
     if my_score==100:
