@@ -1,3 +1,4 @@
+import random
 ####
 # Each team's file must define four tokens:
 #     team_name: a string
@@ -7,8 +8,8 @@
 ####
 
 team_name = 'PAULS' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+strategy_name = 'BACKSTAB'
+strategy_description = 'it decides based on if the score is 0 if it isnt always b if it is wait till last then b'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -24,11 +25,31 @@ def move(my_history, their_history, my_score, their_score):
     # The most recent round is my_history[-1] and their_history[-1].
     
     # Analyze my_history and their_history and/or my_score and their_score.
-    # Decide whether to return 'c' or 'b'.
-    
-    return 'c'
+    # Decide whether to return 'c' or 'b'
+    historycc=0
+    historybb=0
+    choices=('b','c')
+    index=random.randint(0,1)
+    for c in their_history:
+        if c == 'c':
+            historycc=historycc+1
+    for b in their_history:
+        if b == 'b':
+            historybb= historybb+1
+    while my_score == 0:
+        return (choices[index])
+    if my_score==100:
+        return 'b'
+    else:
+        if my_score==0:
+            return 'c'
+        else:
+            return 'b'
+    if historycc>historybb:
+        print 'b'
 
-    
+    if my_score < their_score:
+        return 'b'
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
     from this module. Prints error if return value != result.
@@ -50,9 +71,9 @@ if __name__ == '__main__':
     # Test 1: Betray on first move.
     if test_move(my_history='',
               their_history='', 
-              my_score=0,
+              my_score=100,
               their_score=0,
-              result='b'):
+              result='c'):
          print 'Test passed'
      # Test 2: Continue betraying if they collude despite being betrayed.
     test_move(my_history='bbb',
