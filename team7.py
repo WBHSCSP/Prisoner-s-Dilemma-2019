@@ -38,11 +38,6 @@ def move(my_history, their_history, my_score, their_score):
             historybb= historybb+1
     while my_score == 0:
         return (choices[index])
-        
-    if their_score==100:
-        return 'b'
-    else:
-        return 'c'
     if my_score==100:
         return 'b'
     else:
