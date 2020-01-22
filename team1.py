@@ -29,18 +29,25 @@ def move(my_history, their_history, my_score, their_score):
     # Decide whether to return 'c' or 'b'.
     b = 'b'
     tenlookb = 0
+    a = 0
+    c = 0
     
     oppob = 0
-    roundsofar = len(my_history) - 1
+    roundsofar = len(my_history) 
     for b in their_history:
-        oppob += 1
+        if 'b' in their_history[a]:
+            oppob += 1.
+        a += 1
         
     tenlook = my_history[roundsofar - 9: roundsofar + 1]
     
     for b in tenlook:
-        tenlookb += 1
+        if 'b' in tenlook[c]:
+            tenlookb += 1.
+        c += 1
+    roundsofar + 1
     
-    if len(my_history) <= 10:
+    if len(my_history) <= 2:
         if len(my_history) == 0 or len(my_history) == 1:
             return 'c'
         if len(my_history) == 2:
@@ -48,39 +55,35 @@ def move(my_history, their_history, my_score, their_score):
                 return 'b'
             else:
                 return 'c'
-        if len(my_history) > 2 and len(my_history) < 10:
-            if oppob/roundsofar >= .33:
-                return 'b'
-            if oppob/roundsofar < .33:
-                return 'c'
-        if len(my_history) == 10:
-            if 'b' in their_history:
-                return 'b'
-            else:
-                return 'c'
-            
-    if len(my_history) > 10:
+    if len(my_history) >= 3:
         if my_score > their_score:
             return 'b'
-        if oppob/roundsofar > .33:
+        if (oppob/roundsofar) > .33:
             return 'b'
-        if oppob/roundsofar == 0:
+        if (oppob/roundsofar) == 0:
             return 'c'
-        if oppob/roundsofar > 0 and oppob/roundsofar <= .33:
-            if 'b' in tenlook:
-                if tenlookb > 2:
-                    return 'c'
-                if oppob/roundsofar >= .155:
-                    if b in tenlook [5:10]:
+        if (oppob/roundsofar) > 0 and (oppob/roundsofar) <= .33:
+            if roundsofar >= 10:
+                if 'b' in tenlook:
+                    if tenlookb > 2:
                         return 'c'
-                    else:
-                        return 'b'
-                if oppob/roundsofar < .155:
-                    if b in tenlook[3:10]:
-                        return 'c'
-                    else: return 'b'
+                    if oppob/roundsofar >= .155:
+                        if 'b' in tenlook [5:10]:
+                            return 'c'
+                        else:
+                            return 'b'
+                    if oppob/roundsofar < .155:
+                        if 'b' in tenlook[3:10]:
+                            return 'c'
+                        else: 
+                            return 'b'
+                else:
+                    return 'b'
             else:
-                return 'b'
+                if oppob/roundsofar >= .155:
+                    return 'b'
+                else:
+                    return 'c'
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
